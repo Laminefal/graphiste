@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie | Portfolio Graphiste</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-40 glassmorphism py-4 px-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-primary-accent">GRAPHISTE.</a>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-text-primary hover:text-primary-accent transition">Accueil</a>
+                <a href="index.html#projects" class="text-text-primary hover:text-primary-accent transition">Projets</a>
+                <a href="gallery.html" class="text-text-primary hover:text-primary-accent transition">Galerie</a>
+                <a href="index.html#about" class="text-text-primary hover:text-primary-accent transition">À propos</a>
+                <a href="index.html#contact" class="text-text-primary hover:text-primary-accent transition">Contact</a>
+            </nav>
+            
+            <div class="md:hidden flex items-center">
+                <div id="menu-toggle" class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-primary-dark z-30 pt-20 px-6 md:hidden">
+        <nav class="flex flex-col space-y-6 text-center">
+            <a href="index.html" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Accueil</a>
+            <a href="index.html#projects" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Projets</a>
+            <a href="gallery.html" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Galerie</a>
+            <a href="index.html#about" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">À propos</a>
+            <a href="index.html#contact" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="pt-32 pb-20 px-6 bg-primary-dark">
+        <div class="container mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">Ma <span class="text-primary-accent">Galerie</span></h1>
+            <p class="text-text-secondary text-center max-w-2xl mx-auto mb-12">
+                Découvrez une collection de mes créations graphiques et visuelles.
+            </p>
+
+            <!-- Gallery Filters -->
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex rounded-md shadow-sm glassmorphism p-1" role="group">
+                    <button type="button" class="gallery-filter px-4 py-2 text-sm font-medium rounded-l-lg hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="all">
+                        Tous
+                    </button>
+                    <button type="button" class="gallery-filter px-4 py-2 text-sm font-medium hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="illustration">
+                        Illustrations
+                    </button>
+                    <button type="button" class="gallery-filter px-4 py-2 text-sm font-medium hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="affiche">
+                        Affiches
+                    </button>
+                    <button type="button" class="gallery-filter px-4 py-2 text-sm font-medium hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="logo">
+                        Logos
+                    </button>
+                    <button type="button" class="gallery-filter px-4 py-2 text-sm font-medium rounded-r-lg hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="photo">
+                        Photographies
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="gallery-grid">
+                <!-- Les éléments de la galerie seront ajoutés dynamiquement par JavaScript -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="load-more" class="magnetic-btn px-8 py-3 border-2 border-primary-accent text-primary-accent font-bold rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                    Charger plus
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="gallery-lightbox" class="lightbox">
+        <div class="lightbox-content relative max-w-4xl">
+            <button id="close-gallery-lightbox" class="absolute -top-12 right-0 text-text-primary hover:text-primary-accent transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] rounded-lg">
+            <div class="mt-4 text-center">
+                <h3 id="lightbox-title" class="text-xl font-bold text-primary-accent"></h3>
+                <p id="lightbox-category" class="text-text-secondary text-sm"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-secondary-dark">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="index.html" class="text-2xl font-bold text-primary-accent">GRAPHISTE.</a>
+                    <p class="text-text-secondary mt-2">Création de visuels impactants</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-text-secondary hover:text-primary-accent transition">Mentions légales</a>
+                    <a href="#" class="text-text-secondary hover:text-primary-accent transition">Politique de confidentialité</a>
+                    <a href="#" class="text-text-secondary hover:text-primary-accent transition">CGV</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-text-secondary text-sm">
+                <p>© 2023 FALL LE DESIGNE. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>

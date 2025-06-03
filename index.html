@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Lamine Fall</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-primary-dark z-50 flex flex-col items-center justify-center">
+        <div class="loader mb-4"></div>
+        <p class="text-primary-accent">Chargement du portfolio...</p>
+    </div>
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-40 glassmorphism py-4 px-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary-accent">Fall Le Designer.</a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="text-text-primary hover:text-primary-accent transition">Accueil</a>
+                <a href="#skills" class="text-text-primary hover:text-primary-accent transition">Compétences</a>
+                <a href="#projects" class="text-text-primary hover:text-primary-accent transition">Projets</a>
+                <a href="#about" class="text-text-primary hover:text-primary-accent transition">À propos</a>
+                <a href="#contact" class="text-text-primary hover:text-primary-accent transition">Contact</a>
+            </nav>
+            
+            <!-- Dark/Light Mode Toggle -->
+            <div class="hidden md:flex items-center">
+                <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center bg-secondary-dark text-text-primary hover:text-primary-accent transition">
+                    <svg id="dark-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                    <svg id="light-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button id="theme-toggle-mobile" class="w-8 h-8 rounded-full flex items-center justify-center bg-secondary-dark text-text-primary hover:text-primary-accent transition mr-4">
+                    <svg id="dark-icon-mobile" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                    <svg id="light-icon-mobile" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div id="menu-toggle" class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-primary-dark z-30 pt-20 px-6 md:hidden">
+        <nav class="flex flex-col space-y-6 text-center">
+            <a href="#home" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Accueil</a>
+            <a href="#skills" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Compétences</a>
+            <a href="#projects" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Projets</a>
+            <a href="#about" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">À propos</a>
+            <a href="#contact" class="text-2xl text-text-primary hover:text-primary-accent transition py-2">Contact</a>
+        </nav>
+    </div>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary-dark to-secondary-dark opacity-90"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-20"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="text-primary-accent">Bonjour,</span> je suis <span id="typewriter" class="typewriter"></span>
+            </h1>
+            <p class="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-10">
+                Graphiste passionné spécialisé dans la création d'identités visuelles marquantes et d'expériences digitales mémorables.
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="#projects" class="magnetic-btn px-8 py-3 bg-primary-accent text-primary-dark font-bold rounded-full hover:bg-opacity-90 transition">
+                    Voir mes projets
+                </a>
+                <a href="#contact" class="magnetic-btn px-8 py-3 border-2 border-primary-accent text-primary-accent font-bold rounded-full hover:bg-primary-accent hover:bg-opacity-10 transition">
+                    Me contacter
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 w-full text-center animate-bounce">
+            <a href="#skills" class="text-text-secondary hover:text-primary-accent transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-secondary-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes <span class="text-primary-accent">Compétences</span></h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    Maîtrisant les outils essentiels du design graphique, je crée des visuels qui captivent et communiquent efficacement.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <!-- Illustrator -->
+                <div class="skill-card glassmorphism p-6 rounded-lg text-center">
+                    <div class="skill-icon mb-4 mx-auto w-16 h-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+                            <path d="M42 10.4853L37.5147 6L6 37.5147L10.4853 42L42 10.4853Z" fill="#FF9A00"/>
+                            <path d="M41.9999 10.4853L37.5146 6L23.9999 19.5147L28.4852 24L41.9999 10.4853Z" fill="#FF7D00"/>
+                            <path d="M28.4852 24L23.9999 19.5147L6 37.5147L10.4853 42L28.4852 24Z" fill="#FF3D00"/>
+                            <path d="M24 28.4853L19.5147 24L10.4853 33.0294L14.9706 37.5147L24 28.4853Z" fill="#FF3D00"/>
+                            <path d="M14.9706 37.5147L10.4853 33.0294L6 37.5147L10.4853 42L14.9706 37.5147Z" fill="#DD2C00"/>
+                            <path d="M24 28.4853L28.4853 24L42 37.5147L37.5147 42L24 28.4853Z" fill="#DD2C00"/>
+                            <path d="M19.5147 24L24 19.5147L37.5147 33.0294L33.0294 37.5147L19.5147 24Z" fill="#FF9A00"/>
+                            <path d="M33.0294 37.5147L37.5147 33.0294L42 37.5147L37.5147 42L33.0294 37.5147Z" fill="#FF7D00"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Adobe Illustrator</h3>
+                    <p class="text-sm text-text-secondary">Illustration vectorielle</p>
+                </div>
+                
+                <!-- Photoshop -->
+                <div class="skill-card glassmorphism p-6 rounded-lg text-center">
+                    <div class="skill-icon mb-4 mx-auto w-16 h-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+                            <path d="M6 6H42V42H6V6Z" fill="#001E36"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#001E36"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#001E36"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#03A9F4"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#03A9F4"/>
+                            <path d="M18 6H30V18H18V6Z" fill="#01579B"/>
+                            <path d="M6 18H18V30H6V18Z" fill="#01579B"/>
+                            <path d="M30 30H42V42H30V30Z" fill="#01579B"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Adobe Photoshop</h3>
+                    <p class="text-sm text-text-secondary">Retouche photo</p>
+                </div>
+                
+                <!-- InDesign -->
+                <div class="skill-card glassmorphism p-6 rounded-lg text-center">
+                    <div class="skill-icon mb-4 mx-auto w-16 h-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+                            <path d="M6 6H42V42H6V6Z" fill="#49021F"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#49021F"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#49021F"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#FF3366"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#FF3366"/>
+                            <path d="M18 6H30V18H18V6Z" fill="#9E0038"/>
+                            <path d="M6 18H18V30H6V18Z" fill="#9E0038"/>
+                            <path d="M30 30H42V42H30V30Z" fill="#9E0038"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Adobe InDesign</h3>
+                    <p class="text-sm text-text-secondary">Mise en page</p>
+                </div>
+                
+                <!-- XD -->
+                <div class="skill-card glassmorphism p-6 rounded-lg text-center">
+                    <div class="skill-icon mb-4 mx-auto w-16 h-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+                            <path d="M6 6H42V42H6V6Z" fill="#430059"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#430059"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#430059"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#FF61F6"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#FF61F6"/>
+                            <path d="M18 6H30V18H18V6Z" fill="#B2008E"/>
+                            <path d="M6 18H18V30H6V18Z" fill="#B2008E"/>
+                            <path d="M30 30H42V42H30V30Z" fill="#B2008E"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Adobe XD</h3>
+                    <p class="text-sm text-text-secondary">Design d'interface</p>
+                </div>
+                
+                <!-- Figma -->
+                <div class="skill-card glassmorphism p-6 rounded-lg text-center">
+                    <div class="skill-icon mb-4 mx-auto w-16 h-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+                            <path d="M18 6H30V18H18V6Z" fill="#0ACF83"/>
+                            <path d="M18 18H30V30H18V18Z" fill="#A259FF"/>
+                            <path d="M6 30H18V42H6V30Z" fill="#F24E1E"/>
+                            <path d="M18 30H30V42H18V30Z" fill="#FF7262"/>
+                            <path d="M30 18H42V30H30V18Z" fill="#1ABCFE"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Figma</h3>
+                    <p class="text-sm text-text-secondary">Prototypage</p>
+                </div>
+                
+                <!-- After Effects -->
+                <div class="skill-card glassmorphism p-6 rounded-lg text-center">
+                    <div class="skill-icon mb-4 mx-auto w-16 h-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+                            <path d="M6 6H42V42H6V6Z" fill="#27005E"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#27005E"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#27005E"/>
+                            <path d="M6 6H30V30H6V6Z" fill="#9055FF"/>
+                            <path d="M18 18H42V42H18V18Z" fill="#9055FF"/>
+                            <path d="M18 6H30V18H18V6Z" fill="#5E17EB"/>
+                            <path d="M6 18H18V30H6V18Z" fill="#5E17EB"/>
+                            <path d="M30 30H42V42H30V30Z" fill="#5E17EB"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2">After Effects</h3>
+                    <p class="text-sm text-text-secondary">Animation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-primary-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes <span class="text-primary-accent">Projets</span></h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    Découvrez une sélection de mes créations les plus récentes et marquantes.
+                </p>
+            </div>
+            
+            <!-- Project Filters -->
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex rounded-md shadow-sm glassmorphism p-1" role="group">
+                    <button type="button" class="filter-btn px-4 py-2 text-sm font-medium rounded-l-lg hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="all">
+                        Tous
+                    </button>
+                    <button type="button" class="filter-btn px-4 py-2 text-sm font-medium hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="print">
+                        Print
+                    </button>
+                    <button type="button" class="filter-btn px-4 py-2 text-sm font-medium hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="digital">
+                        Digital
+                    </button>
+                    <button type="button" class="filter-btn px-4 py-2 text-sm font-medium rounded-r-lg hover:bg-primary-accent hover:bg-opacity-20 transition" data-filter="branding">
+                        Identité visuelle
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="project-card group" data-category="branding">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                        <img src="/images/image4.png" 
+                             alt="Projet d'identité visuelle" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             loading="lazy">
+                        <div class="project-overlay absolute inset-0 bg-primary-dark bg-opacity-80 flex flex-col justify-center items-center p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary-accent">Affiche événementielle</h3>
+                            <p class="text-text-primary mb-4">Création d'une affiche pour la TCHESS CLUB à l'occasion de la fête des femmes</p>
+                            <button class="view-project-btn magnetic-btn px-4 py-2 border border-primary-accent text-primary-accent rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                                Voir le projet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card group" data-category="digital">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                        <img src="/images/image9.png" 
+                             alt="Design d'interface" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             loading="lazy">
+                        <div class="project-overlay absolute inset-0 bg-primary-dark bg-opacity-80 flex flex-col justify-center items-center p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary-accent">Affiche événementielle</h3>
+                            <p class="text-text-primary mb-4">Création d'une Affiche pour la journée de graduation de la deuxiéme promotion de la licence en ingénierie informatique</p>
+                            <button class="view-project-btn magnetic-btn px-4 py-2 border border-primary-accent text-primary-accent rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                                Voir le projet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card group" data-category="print">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                        <img src="/images/image8.png" 
+                             alt="Affiche événementielle" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             loading="lazy">
+                        <div class="project-overlay absolute inset-0 bg-primary-dark bg-opacity-80 flex flex-col justify-center items-center p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary-accent">Affiche événementielle</h3>
+                            <p class="text-text-primary mb-4">Création d'une affiche pour un festival de musique</p>
+                            <button class="view-project-btn magnetic-btn px-4 py-2 border border-primary-accent text-primary-accent rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                                Voir le projet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card group" data-category="branding">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                        <img src="/images/image11.png" 
+                             alt="Packaging design" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             loading="lazy">
+                        <div class="project-overlay absolute inset-0 bg-primary-dark bg-opacity-80 flex flex-col justify-center items-center p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary-accent">Affiche événementielle</h3>
+                            <p class="text-text-primary mb-4">Conception d'une affiche pour une journée de distribution de ndogou</p>
+                            <button class="view-project-btn magnetic-btn px-4 py-2 border border-primary-accent text-primary-accent rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                                Voir le projet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card group" data-category="digital">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                        <img src="/images/image3.png" 
+                             alt="Site web" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             loading="lazy">
+                        <div class="project-overlay absolute inset-0 bg-primary-dark bg-opacity-80 flex flex-col justify-center items-center p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary-accent">Affiche événementielle</h3>
+                            <p class="text-text-primary mb-4">Conception d'une affiche pour la journée du lancement des activités de la communauté uasz--ai</p>
+                            <button class="view-project-btn magnetic-btn px-4 py-2 border border-primary-accent text-primary-accent rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                                Voir le projet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card group" data-category="print">
+                    <div class="relative overflow-hidden rounded-lg aspect-square">
+                        <img src="/images/image1.png" 
+                             alt="Brochure" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             loading="lazy">
+                        <div class="project-overlay absolute inset-0 bg-primary-dark bg-opacity-80 flex flex-col justify-center items-center p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary-accent">Affiche événementielle</h3>
+                            <p class="text-text-primary mb-4">Conception d'une affiche pour une journée de yendou de la licence en ingénierie informatique</p>
+                            <button class="view-project-btn magnetic-btn px-4 py-2 border border-primary-accent text-primary-accent rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                                Voir le projet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="gallery.html" class="magnetic-btn inline-block px-8 py-3 border-2 border-primary-accent text-primary-accent font-bold rounded-full hover:bg-primary-accent hover:text-primary-dark transition">
+                    Voir plus de projets
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-secondary-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <div class="relative">
+                        <div class="w-full h-full bg-primary-accent absolute -bottom-2 -right-2 rounded-lg"></div>
+                        <img src="/images/image14.png" 
+                             alt="Portrait du graphiste" 
+                             class="relative rounded-lg w-full max-w-md mx-auto"
+                             loading="lazy">
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">À propos de <span class="text-primary-accent">moi</span></h2>
+                    <p class="text-text-secondary mb-6">
+                        Passionné par le design graphique depuis mon plus jeune âge, j'ai transformé cette passion en une carrière enrichissante. Diplômé de l'École Supérieure d'Art et Design, je mets mon expertise au service de projets variés et ambitieux.
+                    </p>
+                    <p class="text-text-secondary mb-6">
+                        Mon approche combine rigueur technique et sensibilité artistique, avec pour objectif de créer des visuels qui non seulement captent l'attention, mais racontent aussi une histoire et véhiculent des émotions.
+                    </p>
+                    <p class="text-text-secondary mb-8">
+                        En dehors du design, je m'intéresse à la photographie, à l'art contemporain et aux nouvelles technologies, autant de sources d'inspiration qui nourrissent ma créativité.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h3 class="font-bold mb-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-accent" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                </svg>
+                                Formation
+                            </h3>
+                            <p class="text-sm text-text-secondary">École Supérieure d'Art et Design</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-accent" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                </svg>
+                                Expérience
+                            </h3>
+                            <p class="text-sm text-text-secondary">8+ ans dans le design graphique</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-accent" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                </svg>
+                                Clients
+                            </h3>
+                            <p class="text-sm text-text-secondary">50+ projets réalisés</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary-accent" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                </svg>
+                                Localisation
+                            </h3>
+                            <p class="text-sm text-text-secondary">Paris, France</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="magnetic-btn inline-block px-8 py-3 bg-primary-accent text-primary-dark font-bold rounded-full hover:bg-opacity-90 transition">
+                        Travaillons ensemble
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-primary-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contactez-<span class="text-primary-accent">moi</span></h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    Vous avez un projet en tête ? Parlons-en ! Je suis toujours ouvert à de nouvelles collaborations.
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium">Votre nom</label>
+                            <input type="text" id="name" name="name" class="form-input w-full px-4 py-3 rounded-lg" required>
+                            <div id="name-error" class="error-message">Veuillez entrer votre nom</div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium">Votre email</label>
+                            <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg" required>
+                            <div id="email-error" class="error-message">Veuillez entrer une adresse email valide</div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block mb-2 text-sm font-medium">Sujet</label>
+                            <input type="text" id="subject" name="subject" class="form-input w-full px-4 py-3 rounded-lg" required>
+                            <div id="subject-error" class="error-message">Veuillez entrer un sujet</div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block mb-2 text-sm font-medium">Votre message</label>
+                            <textarea id="message" name="message" rows="5" class="form-input w-full px-4 py-3 rounded-lg" required></textarea>
+                            <div id="message-error" class="error-message">Veuillez entrer votre message</div>
+                        </div>
+                        
+                        <button type="submit" class="magnetic-btn w-full px-8 py-3 bg-primary-accent text-primary-dark font-bold rounded-full hover:bg-opacity-90 transition">
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="glassmorphism p-8 rounded-lg h-full">
+                        <h3 class="text-xl font-bold mb-6">Coordonnées</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-accent bg-opacity-20 flex items-center justify-center text-primary-accent mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Adresse</h4>
+                                    <p class="text-text-secondary">15 Rue du Design, 75015 Paris</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-accent bg-opacity-20 flex items-center justify-center text-primary-accent mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Téléphone</h4>
+                                    <p class="text-text-secondary">+33 6 12 34 56 78</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-accent bg-opacity-20 flex items-center justify-center text-primary-accent mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Email</h4>
+                                    <p class="text-text-secondary">contact@graphiste-portfolio.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-accent bg-opacity-20 flex items-center justify-center text-primary-accent mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Horaires</h4>
+                                    <p class="text-text-secondary">Lun-Ven: 9h-18h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold mt-10 mb-6">Réseaux sociaux</h3>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon w-10 h-10 rounded-full bg-secondary-dark flex items-center justify-center hover:bg-primary-accent hover:bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon w-10 h-10 rounded-full bg-secondary-dark flex items-center justify-center hover:bg-primary-accent hover:bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon w-10 h-10 rounded-full bg-secondary-dark flex items-center justify-center hover:bg-primary-accent hover:bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon w-10 h-10 rounded-full bg-secondary-dark flex items-center justify-center hover:bg-primary-accent hover:bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-icon w-10 h-10 rounded-full bg-secondary-dark flex items-center justify-center hover:bg-primary-accent hover:bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-10 bg-secondary-dark">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold text-primary-accent">GRAPHISTE.</a>
+                    <p class="text-text-secondary mt-2">Création de visuels impactants</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-text-secondary hover:text-primary-accent transition">Mentions légales</a>
+                    <a href="#" class="text-text-secondary hover:text-primary-accent transition">Politique de confidentialité</a>
+                    <a href="#" class="text-text-secondary hover:text-primary-accent transition">CGV</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-text-secondary text-sm">
+                <p>© 2023 FALL LE DESIGNE. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content relative">
+            <button id="close-lightbox" class="absolute -top-10 right-0 text-text-primary hover:text-primary-accent transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full">
+            <div class="text-center mt-4">
+                <h3 id="lightbox-title" class="text-xl font-bold text-primary-accent"></h3>
+                <p id="lightbox-description" class="text-text-primary"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
