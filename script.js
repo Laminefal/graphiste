@@ -48,7 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Typewriter effect
     const typewriterElement = document.getElementById('typewriter');
-    const phrases = ["des identités visuelles", "des interfaces digitales", "des visuels qui marquent"];
+    const phrases = [
+        "l'identité visuelle qui parle sans mots",
+        "le lien entre pixels et émotions",
+        "la trace mnésique dans l'océan digital"
+    ];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -69,11 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!isDeleting && charIndex === currentPhrase.length) {
             isDeleting = true;
-            typingSpeed = 1500; // Pause at end of phrase
+            typingSpeed = 1500;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingSpeed = 500; // Pause before typing next phrase
+            typingSpeed = 500;
         }
 
         setTimeout(typeWriter, typingSpeed);
@@ -133,20 +137,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('bg-primary-accent', 'bg-opacity-20'));
-            
-            // Add active class to clicked button
             this.classList.add('bg-primary-accent', 'bg-opacity-20');
             
             const filter = this.getAttribute('data-filter');
             
             projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) 
+                    ? 'block' 
+                    : 'none';
             });
         });
     });
@@ -162,13 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
     viewProjectBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const projectCard = this.closest('.project-card');
-            const imgSrc = projectCard.querySelector('img').src;
-            const title = projectCard.querySelector('h3').textContent;
-            const description = projectCard.querySelector('p').textContent;
-            
-            lightboxImage.src = imgSrc;
-            lightboxTitle.textContent = title;
-            lightboxDescription.textContent = description;
+            lightboxImage.src = projectCard.querySelector('img').src;
+            lightboxTitle.textContent = projectCard.querySelector('h3').textContent;
+            lightboxDescription.textContent = projectCard.querySelector('p').textContent;
             
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -187,67 +182,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Form validation
+    // Form validation and submission
     const contactForm = document.getElementById('contact-form');
-    
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Validation
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+            const messageInput = document.getElementById('message');
+            
+            const inputs = [
+                { element: nameInput, error: document.getElementById('name-error'), message: 'Veuillez entrer votre nom' },
+                { element: emailInput, error: document.getElementById('email-error'), message: 'Veuillez entrer une adresse email valide', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+                { element: subjectInput, error: document.getElementById('subject-error'), message: 'Veuillez entrer un sujet' },
+                { element: messageInput, error: document.getElementById('message-error'), message: 'Veuillez entrer votre message' }
+            ];
+            
             let isValid = true;
             
-            // Validate name
-            const nameInput = document.getElementById('name');
-            const nameError = document.getElementById('name-error');
-            if (nameInput.value.trim() === '') {
-                nameInput.classList.add('input-error');
-                nameError.style.display = 'block';
-                isValid = false;
-            } else {
-                nameInput.classList.remove('input-error');
-                nameError.style.display = 'none';
-            }
+            inputs.forEach(({ element, error, message, regex }) => {
+                if (element.value.trim() === '' || (regex && !regex.test(element.value.trim()))) {
+                    element.classList.add('input-error');
+                    error.textContent = message;
+                    error.style.display = 'block';
+                    isValid = false;
+                } else {
+                    element.classList.remove('input-error');
+                    error.style.display = 'none';
+                }
+            });
             
-            // Validate email
-            const emailInput = document.getElementById('email');
-            const emailError = document.getElementById('email-error');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value.trim())) {
-                emailInput.classList.add('input-error');
-                emailError.style.display = 'block';
-                isValid = false;
-            } else {
-                emailInput.classList.remove('input-error');
-                emailError.style.display = 'none';
-            }
+            if (!isValid) return;
             
-            // Validate subject
-            const subjectInput = document.getElementById('subject');
-            const subjectError = document.getElementById('subject-error');
-            if (subjectInput.value.trim() === '') {
-                subjectInput.classList.add('input-error');
-                subjectError.style.display = 'block';
-                isValid = false;
-            } else {
-                subjectInput.classList.remove('input-error');
-                subjectError.style.display = 'none';
-            }
-            
-            // Validate message
-            const messageInput = document.getElementById('message');
-            const messageError = document.getElementById('message-error');
-            if (messageInput.value.trim() === '') {
-                messageInput.classList.add('input-error');
-                messageError.style.display = 'block';
-                isValid = false;
-            } else {
-                messageInput.classList.remove('input-error');
-                messageError.style.display = 'none';
-            }
-            
-            if (isValid) {
-                // Here you would typically send the form data to a server
-                alert('Message envoyé avec succès !');
-                contactForm.reset();
+            // Submit to FormSubmit
+            try {
+                const formData = new FormData(contactForm);
+                
+                // Add honeypot for spam prevention
+                formData.append('_honeypot', '');
+                
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    alert('Message envoyé avec succès !');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Une erreur s\'est produite. Veuillez réessayer plus tard.');
             }
         });
     }
@@ -256,7 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
             
@@ -271,34 +264,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // GSAP animations
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Animate sections on scroll
-    gsap.utils.toArray('section').forEach(section => {
-        gsap.from(section, {
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 50,
-            duration: 1
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate sections on scroll
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 0,
+                y: 50,
+                duration: 1
+            });
         });
-    });
-    
-    // Animate skill cards
-    gsap.utils.toArray('.skill-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 30,
-            duration: 0.5,
-            delay: i * 0.1
+        
+        // Animate skill cards
+        gsap.utils.toArray('.skill-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 0,
+                y: 30,
+                duration: 0.5,
+                delay: i * 0.1
+            });
         });
-    });
+    }
 });
