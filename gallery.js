@@ -3,51 +3,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const galleryData = [
         { 
             id: 1, 
-            title: "Illustration abstraite", 
+            title: "Illustration moderne", 
             category: "illustration", 
-            imageUrl: "https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+            imageUrl: "images/image (5).png" 
         },
         { 
             id: 2, 
-            title: "Affiche concert", 
+            title: "Affiche conférence", 
             category: "affiche", 
-            imageUrl: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+            imageUrl: "images/image2.png" 
         },
         { 
             id: 3, 
-            title: "Logo minimaliste", 
+            title: "Logo du dahira  siratikhal moutakhim de l'UASZ", 
             category: "logo", 
-            imageUrl: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+            imageUrl: "images/image (19).png" 
         },
         { 
             id: 4, 
-            title: "Photo urbaine", 
-            category: "photo", 
-            imageUrl: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+            title: "video d'animation d'une affiche", 
+            category: "video", 
+            imageUrl: "images/image (9).png" 
         },
         { 
             id: 5, 
-            title: "Personnage cartoon", 
+            title: "Personnage politique", 
             category: "illustration", 
-            imageUrl: "https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" 
+            imageUrl: "images/image (8).png" 
         },
         { 
             id: 6, 
-            title: "Affiche culturelle", 
+            title: "Affiche religieuse", 
             category: "affiche", 
-            imageUrl: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80" 
+            imageUrl: "images/image7.png" 
         },
         { 
             id: 7, 
-            title: "Logo entreprise", 
+            title: "Logo amicale des étudiants comorien de l'UASZ", 
             category: "logo", 
-            imageUrl: "https://images.unsplash.com/photo-1611162616475-465b4c42f1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+            imageUrl: "images/image16.png" 
         },
         { 
             id: 8, 
-            title: "Paysage naturel", 
-            category: "photo", 
-            imageUrl: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80" 
+            title: "affiche pour une journée de sensibilisation", 
+            category: "affiche", 
+            imageUrl: "images/image (4).png" 
         }
     ];
 
