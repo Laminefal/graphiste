@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
             imageUrl: "images/image2.png" 
         },
         { 
+            id: 2, 
+            title: "Affiche pour une journée de la fête des mères", 
+            category: "affiche", 
+            imageUrl: "images/image4.png" 
+        },
+        { 
             id: 3, 
             title: "Logo du dahira  siratikhal moutakhim de l'UASZ", 
             category: "logo", 
@@ -48,6 +54,48 @@ document.addEventListener('DOMContentLoaded', function() {
             title: "affiche pour une journée de sensibilisation", 
             category: "affiche", 
             imageUrl: "images/image (4).png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche conférence religieuse", 
+            category: "affiche", 
+            imageUrl: "images/image6.png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche pour une journée de synthése philosophique", 
+            category: "affiche", 
+            imageUrl: "images/image12.png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche pour une journée de la fête des mères", 
+            category: "affiche", 
+            imageUrl: "images/image (6).png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche pour une journée de la fête des mères", 
+            category: "affiche", 
+            imageUrl: "images/image17.png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche pour une journée de ndogou d'une amicale", 
+            category: "affiche", 
+            imageUrl: "images/image (3).png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche pour une journée de yéndou de la licence en ingénierie informatique", 
+            category: "affiche", 
+            imageUrl: "images/image1.png" 
+        },
+        { 
+            id: 2, 
+            title: "Affiche pour une vendeuse de patisserie", 
+            category: "affiche", 
+            imageUrl: "images/image13.png" 
         }
     ];
 
