@@ -185,65 +185,95 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form validation and submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validation
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const subjectInput = document.getElementById('subject');
-            const messageInput = document.getElementById('message');
-            
-            const inputs = [
-                { element: nameInput, error: document.getElementById('name-error'), message: 'Veuillez entrer votre nom' },
-                { element: emailInput, error: document.getElementById('email-error'), message: 'Veuillez entrer une adresse email valide', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
-                { element: subjectInput, error: document.getElementById('subject-error'), message: 'Veuillez entrer un sujet' },
-                { element: messageInput, error: document.getElementById('message-error'), message: 'Veuillez entrer votre message' }
-            ];
-            
-            let isValid = true;
-            
-            inputs.forEach(({ element, error, message, regex }) => {
-                if (element.value.trim() === '' || (regex && !regex.test(element.value.trim()))) {
-                    element.classList.add('input-error');
-                    error.textContent = message;
-                    error.style.display = 'block';
-                    isValid = false;
-                } else {
-                    element.classList.remove('input-error');
-                    error.style.display = 'none';
-                }
+            // Reset errors and styles
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
             });
+            document.querySelectorAll('.form-input').forEach(el => {
+                el.classList.remove('input-error');
+            });
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
             
-            if (!isValid) return;
-            
-            // Submit to FormSubmit
-            try {
-                const formData = new FormData(contactForm);
-                
-                // Add honeypot for spam prevention
-                formData.append('_honeypot', '');
-                
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // Show success message
-                    alert('Message envoyé avec succès !');
-                    contactForm.reset();
-                } else {
-                    throw new Error('Erreur lors de l\'envoi');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Une erreur s\'est produite. Veuillez réessayer plus tard.');
+            // Validate form
+            let isValid = true;
+
+            if (!name) {
+                showError('name', 'Veuillez entrer votre nom');
+                isValid = false;
             }
+
+            if (!email || !validateEmail(email)) {
+                showError('email', 'Veuillez entrer une adresse email valide');
+                isValid = false;
+            }
+
+            if (!subject) {
+                showError('subject', 'Veuillez entrer un sujet');
+                isValid = false;
+            }
+
+            if (!message) {
+                showError('message', 'Veuillez entrer votre message');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Add loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+
+            // Create hidden form and submit it
+            const formData = new FormData(contactForm);
+            const action = contactForm.getAttribute('action');
+            
+            fetch(action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = contactForm.querySelector('input[name="_next"]').value;
+                } else {
+                    throw new Error('Erreur réseau');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            });
         });
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(`${fieldId}-error`);
+            
+            field.classList.add('input-error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
     }
     
     // Smooth scrolling for anchor links
