@@ -1,103 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Sample gallery data (replace with your actual images)
     const galleryData = [
-        { 
-            id: 1, 
-            title: "Illustration moderne", 
-            category: "illustration", 
-            imageUrl: "images/image (5).png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche conférence", 
-            category: "affiche", 
-            imageUrl: "images/image2.png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une journée de la fête des mères", 
-            category: "affiche", 
-            imageUrl: "images/image4.png" 
-        },
-        { 
-            id: 3, 
-            title: "Logo du dahira  siratikhal moutakhim de l'UASZ", 
-            category: "logo", 
-            imageUrl: "images/image (19).png" 
-        },
-        { 
-            id: 4, 
-            title: "video d'animation d'une affiche", 
-            category: "video", 
-            imageUrl: "images/image (9).png" 
-        },
-        { 
-            id: 5, 
-            title: "Personnage politique", 
-            category: "illustration", 
-            imageUrl: "images/image (8).png" 
-        },
-        { 
-            id: 6, 
-            title: "Affiche religieuse", 
-            category: "affiche", 
-            imageUrl: "images/image7.png" 
-        },
-        { 
-            id: 7, 
-            title: "Logo amicale des étudiants comorien de l'UASZ", 
-            category: "logo", 
-            imageUrl: "images/image16.png" 
-        },
-        { 
-            id: 8, 
-            title: "affiche pour une journée de sensibilisation", 
-            category: "affiche", 
-            imageUrl: "images/image (4).png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche conférence religieuse", 
-            category: "affiche", 
-            imageUrl: "images/image6.png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une journée de synthése philosophique", 
-            category: "affiche", 
-            imageUrl: "images/image12.png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une journée de la fête des mères", 
-            category: "affiche", 
-            imageUrl: "images/image (6).png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une journée de la fête des mères", 
-            category: "affiche", 
-            imageUrl: "images/image17.png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une journée de ndogou d'une amicale", 
-            category: "affiche", 
-            imageUrl: "images/image (3).png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une journée de yéndou de la licence en ingénierie informatique", 
-            category: "affiche", 
-            imageUrl: "images/image1.png" 
-        },
-        { 
-            id: 2, 
-            title: "Affiche pour une vendeuse de patisserie", 
-            category: "affiche", 
-            imageUrl: "images/image13.png" 
-        }
-    ];
+    { id: 1, title: "Illustration moderne", category: "illustration", imageUrl: "images/image (5).png" },
+    { id: 2, title: "Affiche conférence", category: "affiche", imageUrl: "images/image2.png" },
+    { id: 3, title: "Affiche pour une journée de la fête des mères", category: "affiche", imageUrl: "images/image4.png" },
+    { id: 4, title: "Logo du dahira siratikhal moutakhim de l'UASZ", category: "logo", imageUrl: "images/image (19).png" },
+    { id: 5, title: "video d'animation d'une affiche", category: "video", imageUrl: "images/image (9).png" },
+    { id: 6, title: "Personnage politique", category: "illustration", imageUrl: "images/image (8).png" },
+    { id: 7, title: "Affiche religieuse", category: "affiche", imageUrl: "images/image7.png" },
+    { id: 8, title: "Logo amicale des étudiants comorien de l'UASZ", category: "logo", imageUrl: "images/image16.png" },
+    { id: 9, title: "affiche pour une journée de sensibilisation", category: "affiche", imageUrl: "images/image (4).png" },
+    { id: 10, title: "Affiche conférence religieuse", category: "affiche", imageUrl: "images/image6.png" },
+    { id: 11, title: "Affiche pour une journée de synthése philosophique", category: "affiche", imageUrl: "images/image12.png" },
+    { id: 12, title: "Affiche pour une journée de la fête des mères", category: "affiche", imageUrl: "images/image (6).png" },
+    { id: 13, title: "Affiche pour une journée de la fête des mères", category: "affiche", imageUrl: "images/image17.png" },
+    { id: 14, title: "Affiche pour une journée de ndogou d'une amicale", category: "affiche", imageUrl: "images/image (3).png" },
+    { id: 15, title: "Affiche pour une journée de yéndou de la licence en ingénierie informatique", category: "affiche", imageUrl: "images/image1.png" },
+    { id: 16, title: "Affiche pour une vendeuse de patisserie", category: "affiche", imageUrl: "images/image13.png" },
+    { id: 17, title: "Affiche pour une mariage d'un couple à Ndombo", category: "affiche", imageUrl: "images/image8.png" },
+    { id: 18, title: "Affiche de la journée de graduation de la licence ingénierie informatique de l'UASZ", category: "affiche", imageUrl: "images/image9.png" },
+    { id: 19, title: "Affiche pour une de distribution de ndogou", category: "affiche", imageUrl: "images/image11.png" },
+    { id: 20, title: "Affiche pour la celebration de la fête de l'indépendance du Sénégal", category: "affiche", imageUrl: "images/image10.png" }
+];
+
 
     const galleryGrid = document.getElementById('gallery-grid');
     const loadMoreBtn = document.getElementById('load-more');
